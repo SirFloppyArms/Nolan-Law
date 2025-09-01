@@ -1,58 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nolan Law | Personal Résumé Website</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hub for Nolan Law — projects, academics, sports, music, achievements.">
+  <title>Home | Nolan Law</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header>
-    <h1>Nolan Law</h1>
-    <p>Student | Aspiring Developer | Athlete | Musician</p>
-  </header>
+  <header id="site-header" class="site"></header>
+  <nav id="site-nav"></nav>
 
-  <nav>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#sports">Sports</a></li>
-      <li><a href="#music">Music</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+  <main class="container home">
+    <!-- Hero -->
+<section class="hero">
+  <img src="assets/images/hero-placeholder.jpg" alt="Portrait of Nolan Law" class="hero-img">
+  <h1 class="hero-title">Hi, I’m Nolan Law</h1>
+  <p class="hero-sub">Student • Developer • Athlete • Musician</p>
+  <a href="about/index.html" class="btn-primary">Learn More About Me</a>
+</section>
 
-  <main>
-    <section id="about">
-      <h2>About Me</h2>
-      <p>Hi! I’m Nolan, a 15-year-old student in Grade 11 based in Canada. I love coding, sports, and music. This website is my online résumé and portfolio.</p>
-    </section>
+<!-- Intro -->
+<section class="intro">
+  <p>
+    Welcome to my <strong>Everything Site</strong> — a living archive of who I am and what I do. 
+    Here you’ll find my projects, academic progress, sports achievements, music journey, and more. 
+    It grows as I do, so come back anytime to see what’s new.
+  </p>
+</section>
 
-    <section id="projects">
-      <h2>Projects</h2>
-      <p>Showcase your coding projects here (school assignments, personal apps, fun experiments).</p>
-    </section>
+<!-- Featured Sections -->
+<section class="featured grid">
+  <a class="feature-card" href="projects/index.html">
+    <img src="assets/images/projects-placeholder.jpg" alt="Coding projects" class="feature-img">
+    <h2>Projects</h2>
+    <p>Explore my software experiments, coding challenges, and creative builds.</p>
+  </a>
+  <a class="feature-card" href="academics/index.html">
+    <img src="assets/images/academics-placeholder.jpg" alt="Academics section" class="feature-img">
+    <h2>Academics</h2>
+    <p>See my coursework, grades, and reflections on learning.</p>
+  </a>
+  <a class="feature-card" href="sports/index.html">
+    <img src="assets/images/sports-placeholder.jpg" alt="Sports section" class="feature-img">
+    <h2>Sports</h2>
+    <p>Track my triathlon times, refereeing experience, and badminton matches.</p>
+  </a>
+  <a class="feature-card" href="music/index.html">
+    <img src="assets/images/music-placeholder.jpg" alt="Music section" class="feature-img">
+    <h2>Music</h2>
+    <p>Dive into the bands I’ve played in, my repertoire, and performance logs.</p>
+  </a>
+</section>
 
-    <section id="sports">
-      <h2>Sports</h2>
-      <p>Triathlon, hockey referee, badminton, etc.</p>
-    </section>
-
-    <section id="music">
-      <h2>Music</h2>
-      <p>I play tuba and other instruments in school bands and ensembles.</p>
-    </section>
-
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>You can reach me at: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
+    <!-- Quick Links Grid -->
+    <section>
+      <h2 class="section-title">Explore More</h2>
+      <div class="grid cards">
+        <a class="card" href="about/index.html"><h3>About</h3><p>Bio, goals, values, media kit.</p></a>
+        <a class="card" href="resume/index.html"><h3>Résumé</h3><p>Concise overview with links.</p></a>
+        <a class="card" href="achievements/index.html"><h3>Achievements</h3><p>Awards, certifications, milestones.</p></a>
+        <a class="card" href="contact/index.html"><h3>Contact</h3><p>Say hi / collaboration inquiries.</p></a>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Nolan Law</p>
-  </footer>
-
-  <script src="script.js"></script>
+  <footer id="site-footer"></footer>
+  <script>window.SITE = {"root":"","section":"","title":"Home"};</script>
+  <script src="js/layout.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
