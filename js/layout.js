@@ -1,4 +1,4 @@
-// Nolan's Everything Site — Header/Nav/Footer (v7: robust auto-collapse + working dropdown)
+// Nolan's Everything Site — Header/Nav/Footer (v8: popup menu with search)
 (function(){
   const S = window.SITE || {root:'.', section:'', title:''};
   const P = (p)=> (S.root ? (S.root.replace(/\/$/,'') + '/' + p.replace(/^\//,'')) : p);
@@ -41,65 +41,64 @@
   }
 
   /* ---------------- NAV ---------------- */
-  if(nav){
-    nav.className = 'site-nav';
-    nav.setAttribute('role','navigation');
-    nav.setAttribute('aria-label','Primary');
+  if (nav) {
+    nav.className = 'popup-nav';
+    nav.setAttribute('role', 'dialog');
+    nav.setAttribute('aria-hidden', 'true');
     nav.innerHTML = `
-      <div class="container">
-        <div class="nav-center" id="nav-center">
-          ${primaryLinks.map(([label, href])=>{
+      <div class="popup-nav-content">
+        <button class="close-nav" aria-label="Close navigation">&times;</button>
+        <input type="search" id="nav-search" placeholder="Search..." aria-label="Search site">
+        <nav>
+          ${primaryLinks.map(([label, href]) => {
             const url = P(href);
-            const active = (S.section && label.toLowerCase() === S.section.toLowerCase()) ? 'active' : '';
-            return `<a class="${active}" href="${url}">${label}</a>`;
+            return `<a href="${url}" data-label="${label.toLowerCase()}">${label}</a>`;
           }).join('')}
-        </div>
+        </nav>
       </div>
     `;
   }
 
   const menuBtn = header?.querySelector('#menu-toggle');
-  const navCenter = nav?.querySelector('#nav-center');
-  const navContainer = nav?.querySelector('.container');
 
-  function setHeaderHeightVar(){
-    const h = header?.offsetHeight || 64;
-    document.documentElement.style.setProperty('--header-h', h + 'px');
-  }
+  if (menuBtn && nav) {
+    const closeBtn = nav.querySelector('.close-nav');
+    const searchInput = nav.querySelector('#nav-search');
+    const links = Array.from(nav.querySelectorAll('nav a'));
 
-  // Determine if links fit on a single line within the container.
-  function shouldCollapse(){
-    if(!navCenter || !navContainer) return false;
-    // navCenter is nowrap so scrollWidth is total width needed for one line.
-    const needed = Math.ceil(navCenter.scrollWidth);
-    const available = Math.floor(navContainer.clientWidth) - 2; // small guard
-    return needed > available;
-  }
+    // Open / close
+    menuBtn.addEventListener('click', () => {
+      const isOpen = nav.getAttribute('aria-hidden') === 'false';
+      nav.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
+      menuBtn.setAttribute('aria-expanded', String(!isOpen));
+      document.documentElement.classList.toggle('nav-open', !isOpen);
 
-  function closeDropdown(){
-    if(!nav || !menuBtn) return;
-    nav.classList.remove('open');
-    menuBtn.classList.remove('open');
-    menuBtn.setAttribute('aria-expanded','false');
-    document.documentElement.classList.remove('nav-lock');
-  }
+      if (!isOpen) {
+        setTimeout(()=> searchInput?.focus(), 200);
+      }
+    });
 
-  function applyCollapse(){
-    if(!nav) return;
-    const collapse = shouldCollapse();
-    nav.classList.toggle('collapsed', collapse);
-    if(menuBtn){ menuBtn.classList.toggle('show', collapse); }
-    if(!collapse){ closeDropdown(); }
-    setHeaderHeightVar();
-  }
+    closeBtn.addEventListener('click', () => {
+      nav.setAttribute('aria-hidden', 'true');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      document.documentElement.classList.remove('nav-open');
+    });
 
-  // Toggle dropdown
-  if(menuBtn && nav){
-    menuBtn.addEventListener('click', ()=>{
-      const isOpen = nav.classList.toggle('open');
-      menuBtn.classList.toggle('open', isOpen);
-      menuBtn.setAttribute('aria-expanded', String(isOpen));
-      document.documentElement.classList.toggle('nav-lock', isOpen);
+    nav.addEventListener('click', (e) => {
+      if (e.target === nav) {
+        nav.setAttribute('aria-hidden', 'true');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        document.documentElement.classList.remove('nav-open');
+      }
+    });
+
+    // Search filter
+    searchInput?.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      links.forEach(link => {
+        const label = link.dataset.label;
+        link.style.display = label.includes(q) ? '' : 'none';
+      });
     });
   }
 
