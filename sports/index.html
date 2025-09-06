@@ -3,24 +3,115 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Triathlon, hockey refereeing, badminton.">
+  <meta name="description" content="Triathlon, running, and hockey.">
   <title>Sports | Nolan Law</title>
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* Sports Page Custom Styles */
+    .sports-hero {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .sports-hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      margin-bottom: 10px;
+      background: linear-gradient(90deg,var(--accent),var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .sports-hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
+
+    .sports-grid {
+      display: grid;
+      gap: 24px;
+      margin-top: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .sport-card {
+      background: linear-gradient(180deg,#14182a,#0f1220);
+      border: 1px solid #20263f;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      transition: transform .25s ease, border-color .25s ease;
+    }
+    .sport-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+    }
+
+    .sport-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .sport-body {
+      padding: 18px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sport-body h2 {
+      margin: 0 0 10px;
+      font-size: 1.4rem;
+      color: var(--accent);
+    }
+
+    .sport-body p {
+      margin: 0;
+      color: var(--muted);
+    }
+  </style>
 </head>
 <body>
   <header id="site-header" class="site"></header>
   <nav id="site-nav"></nav>
+
   <main class="container">
-    <h1>Sports</h1>
-    <p class="kicker">Athletics overview and highlights.</p>
+    <!-- Hero -->
+    <section class="sports-hero">
+      <h1>Sports</h1>
+      <p>Athletics are a huge part of my life — from endurance to team sports, each one pushes me to grow.</p>
+    </section>
 
-<div class="grid cards">
-  <a class="card" href="triathlon/index.html"><h3>Triathlon</h3><p>PRs, results, training (optional).</p></a>
-  <a class="card" href="hockey-referee/index.html"><h3>Hockey Refereeing</h3><p>Certs & match log.</p></a>
-  <a class="card" href="badminton/index.html"><h3>Badminton</h3><p>Matches & results.</p></a>
-</div>
+    <!-- Sports Grid -->
+    <section class="sports-grid">
+      <a class="sport-card" href="triathlon/index.html">
+        <img src="../assets/images/triathlon-placeholder.jpg" alt="Triathlon" class="sport-img">
+        <div class="sport-body">
+          <h2>Triathlon</h2>
+          <p>Swim, bike, run — tracking my training, PRs, and race results.</p>
+        </div>
+      </a>
 
+      <a class="sport-card" href="running/index.html">
+        <img src="../assets/images/running-placeholder.jpg" alt="Running" class="sport-img">
+        <div class="sport-body">
+          <h2>Running</h2>
+          <p>Training logs, race times, and progress in distance running.</p>
+        </div>
+      </a>
+
+      <a class="sport-card" href="hockey/index.html">
+        <img src="../assets/images/hockey-placeholder.jpg" alt="Hockey" class="sport-img">
+        <div class="sport-body">
+          <h2>Hockey</h2>
+          <p>Refereeing experience, certifications, and match logs.</p>
+        </div>
+      </a>
+    </section>
   </main>
+
   <footer id="site-footer"></footer>
   <script>window.SITE = {"root":"../","section":"Sports","title":"Sports"};</script>
   <script src="../js/layout.js"></script>
