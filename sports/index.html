@@ -6,110 +6,68 @@
   <meta name="description" content="Triathlon, running, and hockey.">
   <title>Sports | Nolan Law</title>
   <link rel="stylesheet" href="../css/style.css">
-  <style>
-    /* Sports Page Custom Styles */
-    .sports-hero {
-      text-align: center;
-      padding: 60px 20px;
-    }
-    .sports-hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3rem);
-      margin-bottom: 10px;
-      background: linear-gradient(90deg,var(--accent),var(--accent-2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .sports-hero p {
-      font-size: 1.1rem;
-      color: var(--muted);
-    }
-
-    .sports-grid {
-      display: grid;
-      gap: 24px;
-      margin-top: 40px;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-
-    .sport-card {
-      background: linear-gradient(180deg,#14182a,#0f1220);
-      border: 1px solid #20263f;
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      transition: transform .25s ease, border-color .25s ease;
-    }
-    .sport-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--accent);
-    }
-
-    .sport-img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .sport-body {
-      padding: 18px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .sport-body h2 {
-      margin: 0 0 10px;
-      font-size: 1.4rem;
-      color: var(--accent);
-    }
-
-    .sport-body p {
-      margin: 0;
-      color: var(--muted);
-    }
-  </style>
 </head>
 <body>
   <header id="site-header" class="site"></header>
   <nav id="site-nav"></nav>
 
   <main class="container">
+
     <!-- Hero -->
-    <section class="sports-hero">
-      <h1>Sports</h1>
-      <p>Athletics are a huge part of my life — from endurance to team sports, each one pushes me to grow.</p>
+    <section class="hero">
+      <img src="../assets/images/sports-hero.jpg" alt="Sports photo" class="hero-img">
+      <h1 class="hero-title">Sports</h1>
+      <p class="hero-sub">Athletics are a huge part of my life — from endurance to team sports, each one pushes me to grow.</p>
     </section>
 
-    <!-- Sports Grid -->
-    <section class="sports-grid">
-      <a class="sport-card" href="triathlon/index.html">
-        <img src="../assets/images/triathlon-placeholder.jpg" alt="Triathlon" class="sport-img">
-        <div class="sport-body">
-          <h2>Triathlon</h2>
-          <p>Swim, bike, run — tracking my training, PRs, and race results.</p>
-        </div>
-      </a>
-
-      <a class="sport-card" href="running/index.html">
-        <img src="../assets/images/running-placeholder.jpg" alt="Running" class="sport-img">
-        <div class="sport-body">
-          <h2>Running</h2>
-          <p>Training logs, race times, and progress in distance running.</p>
-        </div>
-      </a>
-
-      <a class="sport-card" href="hockey/index.html">
-        <img src="../assets/images/hockey-placeholder.jpg" alt="Hockey" class="sport-img">
-        <div class="sport-body">
-          <h2>Hockey</h2>
-          <p>Refereeing experience, certifications, and match logs.</p>
-        </div>
-      </a>
+    <!-- Intro -->
+    <section class="intro">
+      <p>Here you’ll find an overview of the sports I’m most passionate about. Whether it’s competing in triathlons, building endurance through running, or officiating hockey, each sport represents a different challenge and growth opportunity.</p>
     </section>
+
+    <!-- Feature Cards -->
+    <section class="grid featured">
+      <div class="feature-card">
+        <img src="../assets/images/triathlon-placeholder.jpg" alt="Triathlon" class="feature-img">
+        <h2>🏊‍♂️🚴‍♂️🏃 Triathlon</h2>
+        <p>Swim, bike, run — my race results, training insights, and personal bests.</p>
+        <a href="triathlon/index.html" class="btn-primary">Explore Triathlon</a>
+      </div>
+
+      <div class="feature-card">
+        <img src="../assets/images/running-placeholder.jpg" alt="Running" class="feature-img">
+        <h2>🏃 Running</h2>
+        <p>Tracking distance runs, training progress, and race times.</p>
+        <a href="running/index.html" class="btn-primary">Explore Running</a>
+      </div>
+
+      <div class="feature-card">
+        <img src="../assets/images/hockey-placeholder.jpg" alt="Hockey" class="feature-img">
+        <h2>🏒 Hockey</h2>
+        <p>My refereeing journey, certifications, and experiences on the ice.</p>
+        <a href="hockey/index.html" class="btn-primary">Explore Hockey</a>
+      </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section>
+      <h2 class="section-title">Sports Highlights</h2>
+      <div class="grid cards">
+        <div class="card">
+          <h3>Triathlons Completed</h3>
+          <p class="kicker">12+</p>
+        </div>
+        <div class="card">
+          <h3>Running Races</h3>
+          <p class="kicker">20+</p>
+        </div>
+        <div class="card">
+          <h3>Hockey Games Officiated</h3>
+          <p class="kicker">100+</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer id="site-footer"></footer>

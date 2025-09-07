@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Triathlon summary & bests.">
+  <meta name="description" content="Triathlon summary, achievements, and personal bests.">
   <title>Triathlon | Nolan Law</title>
   <link rel="stylesheet" href="../../css/style.css">
 </head>
@@ -11,9 +11,60 @@
   <header id="site-header" class="site"></header>
   <nav id="site-nav"></nav>
   <main class="container">
-    <h1>Triathlon</h1>
-    <p class="kicker">Full results in the Results tab.</p>
-<section class="card"><p>[Personal bests, distances, goals.]</p></section>
+
+    <!-- Hero -->
+    <section class="hero">
+      <img src="../../assets/images/triathlon-hero.jpg" alt="Triathlon photo" class="hero-img">
+      <h1 class="hero-title">Triathlon</h1>
+      <p class="hero-sub">My journey in triathlon — races, achievements, and personal bests.</p>
+    </section>
+
+    <!-- Intro -->
+    <section class="intro">
+      <p>Since starting triathlon, I’ve competed in multiple races, set personal records, and earned some special achievements along the way. This hub brings all that info into one place.</p>
+    </section>
+
+    <!-- Feature Cards -->
+    <section class="grid featured">
+      <div class="feature-card">
+        <img src="../../assets/images/results-thumb.jpg" alt="Race results" class="feature-img">
+        <h2>🏅 Race Results</h2>
+        <p>A full table of my triathlon race history with times and placements.</p>
+        <a href="./results.html" class="btn-primary">View Results</a>
+      </div>
+      <div class="feature-card">
+        <img src="../../assets/images/achievements-thumb.jpg" alt="Achievements" class="feature-img">
+        <h2>🥇 Achievements</h2>
+        <p>Highlights of milestones, podium finishes, and special race moments.</p>
+        <a href="./achievments.html" class="btn-primary">See Achievements</a>
+      </div>
+      <div class="feature-card">
+        <img src="../../assets/images/pb-thumb.jpg" alt="Personal Bests" class="feature-img">
+        <h2>⏱ Personal Bests</h2>
+        <p>My fastest recorded times in swimming, biking, and running.</p>
+        <a href="./personal-bests.html" class="btn-primary">Check Personal Bests</a>
+      </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section>
+      <h2 class="section-title">Highlights at a Glance</h2>
+      <div class="grid cards">
+        <div class="card">
+          <h3>Total Races</h3>
+          <p class="kicker">12+</p>
+        </div>
+        <div class="card">
+          <h3>Best Overall Finish</h3>
+          <p class="kicker">1st Place</p>
+        </div>
+        <div class="card">
+          <h3>Fastest Triathlon</h3>
+          <p class="kicker">55:43</p>
+        </div>
+      </div>
+    </section>
+
   </main>
   <footer id="site-footer"></footer>
   <script>window.SITE = {"root":"../../","section":"Sports","title":"Triathlon"};</script>
