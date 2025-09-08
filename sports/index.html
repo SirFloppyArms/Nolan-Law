@@ -55,7 +55,7 @@
       <div class="grid cards">
         <div class="card">
           <h3>Triathlons Completed</h3>
-          <p class="kicker">12+</p>
+          <p class="kicker" id="total-races">12+</p>
         </div>
         <div class="card">
           <h3>Running Races</h3>
@@ -75,4 +75,21 @@
   <script src="../js/layout.js"></script>
   <script src="../js/main.js"></script>
 </body>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const el = document.getElementById('total-races');
+    if (!el) return;
+    el.textContent = '…';
+    try {
+      // correct path from /sports/index.html
+      const res = await fetch('../assets/data/triathlon-results.json');
+      const data = await res.json();
+      const triCount = data.length;
+      el.textContent = triCount;
+    } catch (err) {
+      console.error('Error loading triathlon count:', err);
+      el.textContent = '—';
+    }
+  });
+</script>
 </html>

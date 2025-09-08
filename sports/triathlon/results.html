@@ -181,7 +181,7 @@
         <tr>
           <th data-index="0" class="sortable">Date</th>
           <th data-index="1" class="sortable">Race Name</th>
-          <th data-index="2" class="sortable">Location</th>
+          <th data-index="2" class="sortable">Race Type</th>
           <th data-index="3" class="sortable">Category</th>
           <th data-index="4" class="sortable">Overall Time</th>
           <th>Details</th>
@@ -208,123 +208,206 @@
   <script src="../../js/layout.js"></script>
   <script src="../../js/main.js"></script>
   <script>
-    let raceData = [];
+  let raceData = [];
 
-    async function loadResults() {
-      const response = await fetch('../../assets/data/triathlon-results.csv');
-      const data = await response.text();
-      const rows = data.split('\n').slice(1); // skip header
-      const tableBody = document.querySelector('#results-table tbody');
+  async function loadResults() {
+    try {
+      // correct path from /sports/triathlon/results.html
+      const res = await fetch('../../assets/data/triathlon-results.json');
+      const data = await res.json();
 
-      rows.forEach(row => {
-        const cols = row.split(',');
-        if (cols.length > 1) {
-          raceData.push(cols);
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>${cols[4]}</td>
-            <td>${cols[2]}</td>
-            <td>${cols[3]}</td>
-            <td>${cols[5]}</td>
-            <td>${cols[6]}</td>
-            <td><button data-id="${cols[0]}" class="view-details">View Details</button></td>
-          `;
-          tableBody.appendChild(tr);
-        }
+      // show all events (you can filter to triathlon only if you want)
+      raceData = data;
+
+      const tbody = document.querySelector('#results-table tbody');
+      tbody.innerHTML = '';
+
+      raceData.forEach((race, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${race.date}</td>
+          <td>${race.event_name}</td>
+          <td>${race.type || '-'}</td>
+          <td>${race.distance_category || '-'}</td>
+          <td>${race.chip_time || '-'}</td>
+          <td><button data-index="${index}" class="view-details">View Details</button></td>
+        `;
+        tbody.appendChild(tr);
       });
 
       document.querySelectorAll('.view-details').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const id = btn.dataset.id;
-          showDetails(id);
-        });
+        btn.addEventListener('click', () => showDetails(parseInt(btn.dataset.index, 10)));
       });
+    } catch (err) {
+      console.error('Error loading results:', err);
+    }
+  }
+
+  function showDetails(idx) {
+  const r = raceData[idx];
+  if (!r) return;
+
+  // Normalize disciplines into an array of trimmed strings
+  const discArray = Array.isArray(r.disciplines)
+    ? r.disciplines.map(d => String(d).trim()).filter(Boolean)
+    : (typeof r.disciplines === 'string'
+        ? r.disciplines.split(/\s*[-,]\s*/).map(d => d.trim()).filter(Boolean)
+        : []);
+
+  // Count occurrences of each discipline (lowercased)
+  const counts = discArray.reduce((acc, d) => {
+    const k = d.toLowerCase();
+    acc[k] = (acc[k] || 0) + 1;
+    return acc;
+  }, {});
+
+  // Keep track of which occurrence we're on for each discipline
+  const occ = {};
+
+  // Helper to capitalize a label nicely
+  const cap = s => String(s).charAt(0).toUpperCase() + String(s).slice(1);
+
+  // Build ordered split array (preserves order and duplicate runs)
+  const splitsShown = []; // [{ label: "Run 1", value: "6:26.0" }, ...]
+  const splitsObj = r.splits || {};
+
+  discArray.forEach(d => {
+    const key = d.toLowerCase();
+    occ[key] = (occ[key] || 0) + 1;
+
+    // Determine label: only number if that discipline appears more than once
+    let label;
+    if (counts[key] > 1) {
+      // e.g. Run -> "Run 1", "Run 2"
+      label = `${cap(key)} ${occ[key]}`;
+    } else {
+      label = cap(key);
     }
 
-    function showDetails(id) {
-      const cols = raceData.find(r => r[0] === id);
-      if (!cols) return;
-
-      const labels = [
-        "ID","Slug","Event Name","Location","Date",
-        "Category","Overall Time","Swim Split","Bike Split",
-        "Run Split","Overall Place","Notes"
-      ];
-
-      const detailsTable = document.getElementById('details-table');
-      detailsTable.innerHTML = '';
-      cols.forEach((val, i) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `<td>${labels[i]}</td><td>${val || '-'}</td>`;
-        detailsTable.appendChild(row);
-      });
-
-      document.getElementById('modal-title').textContent = cols[2];
-      document.getElementById('details-modal').style.display = 'flex';
-    }
-
-    function addSearchFeature() {
-      const searchBar = document.getElementById('search-bar');
-      searchBar.addEventListener('input', () => {
-        const filter = searchBar.value.toLowerCase();
-        const rows = document.querySelectorAll('#results-table tbody tr');
-        rows.forEach(row => {
-          row.style.display = row.textContent.toLowerCase().includes(filter) ? '' : 'none';
-        });
-      });
-    }
-
-    function addSortingFeature() {
-      const headers = document.querySelectorAll('#results-table th.sortable');
-      headers.forEach(header => {
-        header.addEventListener('click', () => {
-          const index = parseInt(header.dataset.index, 10);
-          const tbody = document.querySelector('#results-table tbody');
-          const rows = Array.from(tbody.querySelectorAll('tr'));
-
-          const isAscending = !header.classList.contains('sorted-asc');
-          headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
-          header.classList.add(isAscending ? 'sorted-asc' : 'sorted-desc');
-
-          rows.sort((a, b) => {
-            let aText = a.children[index].textContent.trim();
-            let bText = b.children[index].textContent.trim();
-
-            if (index === 0) {
-              return isAscending
-                ? new Date(aText) - new Date(bText)
-                : new Date(bText) - new Date(aText);
-            }
-            if (index === 4 && aText && bText) {
-              const toSeconds = str => str.split(':').reduce((acc, v) => acc * 60 + Number(v), 0);
-              return isAscending
-                ? toSeconds(aText) - toSeconds(bText)
-                : toSeconds(bText) - toSeconds(aText);
-            }
-            return isAscending
-              ? aText.localeCompare(bText)
-              : bText.localeCompare(aText);
-          });
-
-          tbody.innerHTML = '';
-          rows.forEach(row => tbody.appendChild(row));
-        });
-      });
-    }
-
-    document.getElementById('close-modal').onclick = () => {
-      document.getElementById('details-modal').style.display = 'none';
-    };
-    window.onclick = e => {
-      if (e.target.id === 'details-modal') {
-        document.getElementById('details-modal').style.display = 'none';
+    // Find value in splits:
+    // 1) exact key: splits.run, splits.swim, etc.
+    // 2) numbered key if needed: run1/run2 (use occurrence index)
+    // 3) fallback: any splits key that starts with the discipline + digits
+    let value = undefined;
+    if (splitsObj.hasOwnProperty(key)) {
+      value = splitsObj[key];
+    } else {
+      // try numbered key (e.g., run1)
+      const numKey = `${key}${occ[key]}`; // run1, run2, ...
+      if (splitsObj.hasOwnProperty(numKey)) {
+        value = splitsObj[numKey];
+      } else {
+        // fallback: find any key beginning with the discipline name and ending in digits
+        const matchKey = Object.keys(splitsObj).find(k =>
+          k.toLowerCase().startsWith(key) && /\d+$/.test(k)
+        );
+        if (matchKey) value = splitsObj[matchKey];
       }
-    };
+    }
 
-    loadResults().then(() => {
-      addSearchFeature();
-      addSortingFeature();
+    splitsShown.push({ label, value: value ?? null });
+  });
+
+  // Build the final ordered list the user requested:
+  // Event, Category, Type, Date, Location, Disciplines, Split1, Split2, Split3, Overall Time, Placement, Notes
+  const ordered = [
+    ["Event", r.event_name],
+    ["Category", r.distance_category || '-'],
+    ["Type", r.type || '-'],
+    ["Date", r.date || '-'],
+    ["Location", r.location || '-'],
+    ["Disciplines", discArray.length ? discArray.join(' - ') : '-']
+  ];
+
+  // Append splits (in order). Show up to the number present.
+  splitsShown.forEach(s => {
+    ordered.push([s.label, s.value ?? '-']);
+  });
+
+  // Append the remaining fields
+  ordered.push(["Overall Time", r.chip_time || '-']);
+  ordered.push(["Placement", r.overall_place || '-']);
+  if (r.notes) ordered.push(["Notes", r.notes]);
+
+  // Render table
+  const detailsTable = document.getElementById('details-table');
+  detailsTable.innerHTML = '';
+  ordered.forEach(([label, value]) => {
+    if (value !== null && value !== undefined) {
+      const row = document.createElement('tr');
+      row.innerHTML = `<td>${label}</td><td>${value}</td>`;
+      detailsTable.appendChild(row);
+    }
+  });
+
+  document.getElementById('modal-title').textContent = r.event_name;
+  document.getElementById('details-modal').style.display = 'flex';
+}
+
+  function addSearchFeature() {
+    const searchBar = document.getElementById('search-bar');
+    searchBar.addEventListener('input', () => {
+      const filter = searchBar.value.toLowerCase();
+      const rows = document.querySelectorAll('#results-table tbody tr');
+      rows.forEach(row => {
+        row.style.display = row.textContent.toLowerCase().includes(filter) ? '' : 'none';
+      });
     });
-  </script>
+  }
+
+  function addSortingFeature() {
+    const headers = document.querySelectorAll('#results-table th.sortable');
+    headers.forEach(header => {
+      header.addEventListener('click', () => {
+        const index = parseInt(header.dataset.index, 10);
+        const tbody = document.querySelector('#results-table tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+
+        const isAscending = !header.classList.contains('sorted-asc');
+        headers.forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
+        header.classList.add(isAscending ? 'sorted-asc' : 'sorted-desc');
+
+        rows.sort((a, b) => {
+          let aText = a.children[index].textContent.trim();
+          let bText = b.children[index].textContent.trim();
+
+          if (index === 0) {
+            // Date column
+            return isAscending
+              ? new Date(aText) - new Date(bText)
+              : new Date(bText) - new Date(aText);
+          }
+          if (index === 4 && aText && bText) {
+            // Overall time column (mm:ss or hh:mm:ss)
+            const toSeconds = str => str.split(':').reduce((acc, v) => acc * 60 + Number(v), 0);
+            return isAscending
+              ? toSeconds(aText) - toSeconds(bText)
+              : toSeconds(bText) - toSeconds(aText);
+          }
+          return isAscending
+            ? aText.localeCompare(bText)
+            : bText.localeCompare(aText);
+        });
+
+        tbody.innerHTML = '';
+        rows.forEach(row => tbody.appendChild(row));
+      });
+    });
+  }
+
+  document.getElementById('close-modal').onclick = () => {
+    document.getElementById('details-modal').style.display = 'none';
+  };
+  window.onclick = e => {
+    if (e.target.id === 'details-modal') {
+      document.getElementById('details-modal').style.display = 'none';
+    }
+  };
+
+  loadResults().then(() => {
+    addSearchFeature();
+    addSortingFeature();
+  });
+</script>
 </body>
 </html>
