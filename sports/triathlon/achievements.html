@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Triathlon training notes and achievements.">
+  <title>Triathlon Training | Nolan Law</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    /* Achievements styling */
+    .achievements-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.5em 0;
+    }
+    .achievements-list li {
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, #14182a, #0f1220);
+      border: 1px solid #20263f;
+      box-shadow: var(--shadow);
+    }
+    .achievements-list strong {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <header id="site-header" class="site"></header>
+  <nav id="site-nav"></nav>
+  <main class="container">
+    <h1>Triathlon Training</h1>
+    <p class="kicker">Add if desired.</p>
+    <section class="card"><p>[Weekly summaries, key sessions.]</p></section>
+
+    <h1>Achievements</h1>
+    <p class="kicker">Highlights from my triathlon journey.</p>
+    <ul id="achievements-list" class="achievements-list"></ul>
+  </main>
+  <footer id="site-footer"></footer>
+
+  <script>window.SITE = {"root":"../../","section":"Sports","title":"Triathlon Training"};</script>
+  <script src="../../js/layout.js"></script>
+  <script src="../../js/main.js"></script>
+  <script>
+    async function loadAchievements() {
+      try {
+        const res = await fetch('../../assets/data/triathlon-achievements.json');
+        const achievements = await res.json();
+
+        const list = document.getElementById('achievements-list');
+        list.innerHTML = '';
+
+        achievements
+          .sort((a, b) => b.year - a.year) // newest first
+          .forEach(item => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+              <strong>${item.placement}</strong> — ${item.event} (${item.year}, ${item.category})
+            `;
+            list.appendChild(li);
+          });
+      } catch (err) {
+        console.error('Error loading achievements:', err);
+      }
+    }
+
+    loadAchievements();
+  </script>
+</body>
+</html>

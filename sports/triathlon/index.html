@@ -36,7 +36,7 @@
         <img src="../../assets/images/achievements-thumb.jpg" alt="Achievements" class="feature-img">
         <h2>🥇 Achievements</h2>
         <p>Highlights of milestones, podium finishes, and special race moments.</p>
-        <a href="./achievments.html" class="btn-primary">See Achievements</a>
+        <a href="./achievements.html" class="btn-primary">See Achievements</a>
       </div>
       <div class="feature-card">
         <img src="../../assets/images/pb-thumb.jpg" alt="Personal Bests" class="feature-img">
@@ -55,12 +55,12 @@
           <p class="kicker" id="total-races">12+</p>
         </div>
         <div class="card">
-          <h3>Best Overall Finish</h3>
-          <p class="kicker">1st Place</p>
+          <h3>1st Place Finishes</h3>
+          <p class="kicker" id="first-places">0</p>
         </div>
         <div class="card">
-          <h3>Fastest Triathlon</h3>
-          <p class="kicker">55:43</p>
+          <h3>Fastest Sprint Triathlon</h3>
+          <p class="kicker" id="fastest-sprint">—</p>
         </div>
       </div>
     </section>
@@ -72,20 +72,58 @@
   <script src="../../js/main.js"></script>
 </body>
 <script>
-  document.addEventListener('DOMContentLoaded', async () => {
-    const el = document.getElementById('total-races');
-    if (!el) return;
-    el.textContent = '…';
-    try {
-      // correct path from /sports/triathlon/index.html
-      const res = await fetch('../../assets/data/triathlon-results.json');
-      const data = await res.json();
-      const triCount = data.length;
-      el.textContent = triCount;
-    } catch (err) {
-      console.error('Error loading triathlon count:', err);
-      el.textContent = '—';
+document.addEventListener('DOMContentLoaded', async () => {
+  const totalEl = document.getElementById('total-races');
+  const firstEl = document.getElementById('first-places');
+  const sprintEl = document.getElementById('fastest-sprint');
+
+  if (totalEl) totalEl.textContent = '…';
+  if (firstEl) firstEl.textContent = '…';
+  if (sprintEl) sprintEl.textContent = '…';
+
+  try {
+    const res = await fetch('../../assets/data/triathlon-results.json');
+    const data = await res.json();
+
+    if (totalEl) totalEl.textContent = data.length;
+
+    const firstCount = data.filter(r =>
+      r.overall_place && r.overall_place.trim().toLowerCase().startsWith('1st')
+    ).length;
+    if (firstEl) firstEl.textContent = firstCount;
+
+    // Only keep Triathlon entries whose distance_category is exactly "Sprint" (case-insensitive)
+    const sprintRaces = data.filter(r =>
+      r.type && r.type.toLowerCase() === 'triathlon' &&
+      r.distance_category && r.distance_category.trim().toLowerCase() === 'sprint' &&
+      r.chip_time
+    );
+
+    const parseTime = t => {
+      if (!t || typeof t !== 'string') return Infinity;
+      const parts = t.trim().split(':').map(Number);
+      if (parts.length === 2) return parts[0] * 60 + parts[1];           // mm:ss
+      if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2]; // hh:mm:ss
+      return Infinity;
+    };
+
+    if (!sprintRaces.length) {
+      if (sprintEl) sprintEl.textContent = '—';
+    } else {
+      let fastest = sprintRaces[0];
+      for (let i = 1; i < sprintRaces.length; i++) {
+        if (parseTime(sprintRaces[i].chip_time) < parseTime(fastest.chip_time)) {
+          fastest = sprintRaces[i];
+        }
+      }
+      if (sprintEl) sprintEl.textContent = fastest.chip_time;
     }
-  });
+  } catch (err) {
+    console.error('Error loading triathlon data:', err);
+    if (totalEl) totalEl.textContent = '—';
+    if (firstEl) firstEl.textContent = '—';
+    if (sprintEl) sprintEl.textContent = '—';
+  }
+});
 </script>
 </html>
