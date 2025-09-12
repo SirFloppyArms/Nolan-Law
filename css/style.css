@@ -85,7 +85,11 @@ header.site .menu-toggle.open span:nth-child(1){ transform:translateY(6px) rotat
 header.site .menu-toggle.open span:nth-child(2){ opacity:0 }
 header.site .menu-toggle.open span:nth-child(3){ transform:translateY(-6px) rotate(-45deg) }
 
-header.site .breadcrumbs { font-size:.85rem; color:var(--muted); padding:0 var(--space) 8px; }
+header.site .breadcrumbs {
+  font-size: .85rem;
+  color: var(--muted);
+  padding: 0 0 8px; /* rely on container padding instead */
+}
 
 /* NAV */
 .site-nav{ background:transparent; display:block; }

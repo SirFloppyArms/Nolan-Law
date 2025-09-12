@@ -36,7 +36,9 @@
           <span></span><span></span><span></span>
         </button>
       </div>
-      <div class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb"></div>
+      <div class="container">
+        <div class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb"></div>
+      </div>
     `;
   }
 
@@ -135,10 +137,27 @@
           <a href="${P('accessibility.html')}">Accessibility</a>
           <a href="${P('sitemap.xml')}">Sitemap</a>
         </nav>
-        <div class="social-links">
-          <a href="#" aria-label="GitHub"><i class="icon-github"></i></a>
-          <a href="#" aria-label="LinkedIn"><i class="icon-linkedin"></i></a>
-          <a href="mailto:someone@example.com" aria-label="Email"><i class="icon-mail"></i></a>
+        <div class="social-links" aria-label="Social Media">
+          <a href="https://github.com/SirFloppyArms" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <!-- GitHub SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M12 0a12 12 0 0 0-3.79 23.4c.6.1.82-.26.82-.58v-2.04c-3.34.73-4.04-1.61-4.04-1.61-.55-1.4-1.34-1.77-1.34-1.77-1.09-.74.08-.73.08-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.8 1.3 3.48 1 .1-.78.42-1.3.76-1.6-2.66-.3-5.46-1.33-5.46-5.9 0-1.3.47-2.36 1.24-3.19-.13-.3-.54-1.52.12-3.16 0 0 1-.32 3.3 1.22a11.5 11.5 0 0 1 6 0c2.3-1.54 3.3-1.22 3.3-1.22.66 1.64.25 2.86.12 3.16.77.83 1.24 1.89 1.24 3.19 0 4.58-2.8 5.6-5.48 5.9.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.82.57A12 12 0 0 0 12 0z"/>
+            </svg>
+          </a>
+
+          <a href="https://instagram.com/nolanlaw22" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <!-- Instagram SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3h10zm-5 3.5A5.5 5.5 0 1 0 17.5 13 5.5 5.5 0 0 0 12 7.5zm0 2A3.5 3.5 0 1 1 8.5 13 3.5 3.5 0 0 1 12 9.5zM18 6a1 1 0 1 1-1-1 1 1 0 0 1 1 1z"/>
+            </svg>
+          </a>
+
+          <a href="mailto:nolan.law@yahoo.com" aria-label="Email">
+            <!-- Email SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 2v.01L12 13 4 6.01V6h16zM4 18V8l8 5 8-5v10H4z"/>
+            </svg>
+          </a>
         </div>
       </div>
       <div class="container footer-bottom">

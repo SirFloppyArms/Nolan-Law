@@ -1,0 +1,255 @@
+/* ==================================================
+   home.css — Premium, responsive homepage styles
+   - Purpose: Replace hub.css on the home page
+   - Assumes base variables are defined in css/style.css (see your provided style.css)
+   - Scope: targets elements inside the main.home layout (main.container.home)
+   - Focus: crisp typography, fluid layout, responsive grids, accessible focus states,
+     tasteful motion (respects prefers-reduced-motion), and 1-file-only visuals (no images required)
+   ================================================== */
+
+/* -------------------------------
+   Utility / page scope
+   ------------------------------- */
+/* scope everything to pages that use the home layout */
+main.home { --home-accent: linear-gradient(90deg,var(--accent),var(--accent-2)); }
+
+/* make sure the main area gets full height on larger viewports so hero breathes */
+main.home { display: block; min-height: 100vh; padding-top: clamp(18px, 3.2vw, 36px); padding-bottom: clamp(28px, 4vw, 56px); }
+
+/* -------------------------------
+   Page container tweaks (mobile-first)
+   ------------------------------- */
+main.home > .container { display: block; max-width: var(--maxw); padding-left: calc(var(--space) * 1.0); padding-right: calc(var(--space) * 1.0); }
+
+/* -------------------------------
+   Hero — centerpiece
+   ------------------------------- */
+.home .hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  place-items: center;
+  text-align: center;
+  padding: clamp(36px, 8vw, 96px) 18px;
+  border-radius: calc(var(--radius) * 1.1);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  box-shadow: 0 10px 40px rgba(2,6,23,0.6);
+  overflow: visible;
+}
+
+/* decorative layered blobs — subtle, performant */
+.home .hero::before,
+.home .hero::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(40px) saturate(120%);
+  opacity: 0.16;
+  transition: opacity .4s ease;
+}
+.home .hero::before {
+  width: min(60vw, 720px);
+  height: min(50vh, 520px);
+  left: -6vw;
+  top: -8vw;
+  background: radial-gradient(closest-side, rgba(110,168,254,0.18), transparent 40%);
+  transform: rotate(-8deg);
+}
+.home .hero::after {
+  width: min(48vw, 560px);
+  height: min(40vh, 420px);
+  right: -8vw;
+  bottom: -6vw;
+  background: radial-gradient(closest-side, rgba(149,245,208,0.12), transparent 45%);
+  transform: rotate(10deg);
+}
+
+/* reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .home .hero::before, .home .hero::after { transition: none; animation: none; }
+}
+
+/* make the hero content sit above decorative elements */
+.home .hero > * { position: relative; z-index: 1; }
+
+/* hero image — slightly larger and tactile */
+.home .hero-img {
+  width: clamp(120px, 20vw, 220px);
+  height: clamp(120px, 20vw, 220px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid transparent;
+  box-shadow: 0 18px 40px rgba(2,6,23,0.6), 0 3px 8px rgba(0,0,0,0.3) inset;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
+  transition: transform .45s cubic-bezier(.2,.9,.2,1), box-shadow .35s ease, border-color .35s ease;
+}
+.home .hero-img:hover { transform: translateY(-6px) rotate(-1deg) scale(1.03); }
+
+/* a thin gradient ring using box-shadow trick */
+.home .hero-img { box-shadow: 0 12px 30px rgba(2,6,23,0.6), 0 0 0 6px rgba(110,168,254,0.06); }
+
+/* hero headline */
+.home .hero-title {
+  font-size: clamp(2rem, 6.6vw, 3.6rem);
+  line-height: 1.02;
+  margin: 0.15rem 0 0.3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: var(--home-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-wrap: balance;
+}
+
+.home .hero-sub {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: clamp(0.95rem, 1.9vw, 1.25rem);
+  font-weight: 600;
+}
+
+/* CTA cluster */
+.home .cta-row { display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap; }
+
+.btn-primary {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight:700;
+  background: var(--home-accent);
+  color: color-mix(in srgb, var(--ink) 96%, transparent);
+  border: none;
+  box-shadow: 0 10px 30px rgba(18,30,70,0.45);
+  transform: translateZ(0);
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+.btn-primary:hover { transform: translateY(-3px); filter:brightness(1.05); }
+.btn-secondary {
+  display:inline-flex; align-items:center; gap:10px; padding:10px 16px; border-radius:999px; border:1px solid rgba(255,255,255,0.06);
+  background: transparent; color:var(--ink); font-weight:600; transition: transform .18s ease, background .18s ease; }
+.btn-secondary:hover { transform: translateY(-2px); background: rgba(255,255,255,0.02); }
+
+/* ensure focus ring is visible and consistent */
+.btn-primary:focus-visible, .btn-secondary:focus-visible, .feature-card:focus-visible, .card:focus-visible {
+  outline: 3px solid rgba(110,168,254,0.25);
+  outline-offset: 4px;
+  border-radius: 999px;
+}
+
+/* -------------------------------
+   Featured grid — elevated cards
+   ------------------------------- */
+.home .featured { margin-top: clamp(26px, 5vw, 56px); width:100%; }
+.home .featured.grid { display:grid; gap:22px; grid-template-columns: repeat(1, 1fr); }
+
+/* responsive columns */
+@media (min-width: 640px) {
+  .home .featured.grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 980px) {
+  .home .featured.grid { grid-template-columns: repeat(4, 1fr); gap:26px; }
+}
+
+.feature-card {
+  position: relative;
+  overflow: hidden;
+  padding: 18px;
+  border-radius: calc(var(--radius) - 4px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+  border: 1px solid rgba(255,255,255,0.02);
+  box-shadow: 0 10px 30px rgba(2,6,23,0.55);
+  display:flex; flex-direction:column; gap:12px; min-height:220px;
+  transition: transform .28s cubic-bezier(.2,.9,.25,1), box-shadow .28s ease, border-color .28s ease;
+}
+.feature-card:hover { transform: translateY(-8px); box-shadow: 0 26px 60px rgba(2,6,23,0.6); border-color: color-mix(in srgb, var(--accent) 50%, rgba(255,255,255,0.02)); }
+
+.feature-card .feature-img {
+  width:100%; height:140px; border-radius: calc(var(--radius) - 6px); object-fit:cover; display:block; border:1px solid rgba(255,255,255,0.02);
+}
+.feature-card h2 { margin:0; font-size:1.25rem; color:var(--accent); }
+.feature-card p { margin:0; color:var(--muted); font-size:0.95rem; }
+
+/* subtle overlay decorative flourish on hover */
+.feature-card::after {
+  content: "";
+  position: absolute; inset: auto 0 0 -40%; height: 80%; width: 60%; transform: rotate(-12deg); background: linear-gradient(120deg, rgba(110,168,254,0.06), rgba(149,245,208,0.02)); pointer-events:none; opacity:0; transition: opacity .35s ease;
+}
+.feature-card:hover::after { opacity:1; }
+
+/* make entire card keyboard-focusable */
+.feature-card[tabindex] { cursor: pointer; }
+
+/* -------------------------------
+   Quick Links / cards grid
+   ------------------------------- */
+.section-title { text-align:center; margin-top: clamp(36px, 6vw, 72px); }
+
+.grid.cards { display:grid; gap:18px; grid-template-columns: repeat(1, 1fr); }
+@media (min-width:640px) { .grid.cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width:1000px) { .grid.cards { grid-template-columns: repeat(4, 1fr); } }
+
+.card { padding:20px; min-height:130px; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:8px; border-radius:calc(var(--radius)/1.15); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.card h3 { margin:0; font-size:1.05rem; color:var(--accent-2); }
+.card p { margin:0; color:var(--muted); }
+.card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(2,6,23,0.55); border-color: color-mix(in srgb, var(--accent) 30%, rgba(255,255,255,0.02)); }
+.card a { display:block; width:100%; height:100%; }
+
+/* -------------------------------
+   Footer tweaks (home only) — larger social icons
+   ------------------------------- */
+footer.site.official-footer { padding-top: 22px; }
+footer.site .social-links a { width:36px; height:36px; display:inline-grid; place-items:center; border-radius:50%; background: #0f1220; color:var(--ink); transition: transform .18s ease, background .18s ease; }
+footer.site .social-links a:hover { transform: translateY(-4px); background: var(--accent); color:#071024; }
+
+/* -------------------------------
+   Micro-interactions and helpers
+   ------------------------------- */
+.icon-inline { display:inline-block; vertical-align:middle; width:1.1em; height:1.1em; }
+.small-kicker { font-size:0.92rem; color:var(--muted); }
+
+/* balance long headings where supported */
+@supports (text-wrap: balance) { .home .hero-title { text-wrap: balance; -webkit-text-wrap: balance; } }
+
+/* -------------------------------
+   Large-screen layout enhancements
+   ------------------------------- */
+@media (min-width: 1200px) {
+  /* make hero a two-column layout on very wide screens */
+  .home .hero { grid-template-columns: minmax(320px, 44%) 1fr; text-align: left; align-items: center; gap: 36px; padding: clamp(36px, 6vw, 110px); }
+  .home .hero > img.hero-img { grid-column: 1 / 2; }
+  .home .hero .hero-title, .home .hero .hero-sub, .home .hero .cta-row { grid-column: 2 / 3; }
+  .home .hero::before { left: -12vw; top: -6vw; }
+  .home .hero::after { right: -12vw; bottom: -8vw; }
+}
+
+/* -------------------------------
+   Accessibility: reduced motion and high contrast
+   ------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .home .hero-img, .feature-card, .card, .btn-primary, .btn-secondary { transition: none !important; transform: none !important; }
+  .home .hero::before, .home .hero::after, .feature-card::after { animation: none !important; }
+}
+
+/* high-contrast mode for users who need it */
+@media (forced-colors: active) {
+  .home .hero-title { color: CanvasText; -webkit-text-fill-color: initial; background: none; }
+  .feature-card, .card { border: 1px solid WindowText; }
+}
+
+/* -------------------------------
+   Small tweaks for very small screens
+   ------------------------------- */
+@media (max-width: 420px) {
+  .home .hero { padding: 28px 14px; }
+  .hero-sub { font-size: 0.98rem; }
+  .feature-card { min-height: 180px; }
+}
+
+/* -------------------------------
+   End of file
+   ------------------------------- */
