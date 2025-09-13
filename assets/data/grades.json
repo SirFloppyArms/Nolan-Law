@@ -1,0 +1,171 @@
+[
+  {
+    "year": "2015–2016",
+    "grade_level": 1,
+    "overall_average": "90.37%",
+    "top_subject": "Math",
+    "notes": "Placeholder for Grade 1 notes",
+    "subjects": [
+      { "name": "English", "grade": "80%" },
+      { "name": "French", "grade": "90%" },
+      { "name": "Math", "grade": "100%" },
+      { "name": "Science", "grade": "91.7%" },
+      { "name": "Social Studies", "grade": "91.7%" },
+      { "name": "Music", "grade": "87.5%" },
+      { "name": "Gym", "grade": "91.7%" }
+    ]
+  },
+  {
+    "year": "2016–2017",
+    "grade_level": 2,
+    "overall_average": "86.43%",
+    "top_subject": "Music",
+    "notes": "Placeholder for Grade 2 notes",
+    "subjects": [
+      { "name": "English", "grade": "85%" },
+      { "name": "French", "grade": "70%" },
+      { "name": "Math", "grade": "91.7%" },
+      { "name": "Science", "grade": "83.3%" },
+      { "name": "Social Studies", "grade": "83.3%" },
+      { "name": "Music", "grade": "100%" },
+      { "name": "Gym", "grade": "91.7%" }
+    ]
+  },
+  {
+    "year": "2017–2018",
+    "grade_level": 3,
+    "overall_average": "93.70%",
+    "top_subject": "Math, Science",
+    "notes": "Placeholder for Grade 3 notes",
+    "subjects": [
+      { "name": "English", "grade": "95%" },
+      { "name": "French", "grade": "90%" },
+      { "name": "Math", "grade": "100%" },
+      { "name": "Science", "grade": "100%" },
+      { "name": "Social Studies", "grade": "91.7%" },
+      { "name": "Music", "grade": "87.5%" },
+      { "name": "Gym", "grade": "91.7%" }
+    ]
+  },
+  {
+    "year": "2018–2019",
+    "grade_level": 4,
+    "overall_average": "88.39%",
+    "top_subject": "Math",
+    "notes": "Placeholder for Grade 4 notes",
+    "subjects": [
+      { "name": "English", "grade": "90%" },
+      { "name": "French", "grade": "85%" },
+      { "name": "Math", "grade": "100%" },
+      { "name": "Science", "grade": "83.3%" },
+      { "name": "Social Studies", "grade": "83.3%" },
+      { "name": "Music", "grade": "93.8%" },
+      { "name": "Gym", "grade": "83.3%" }
+    ]
+  },
+  {
+    "year": "2019–2020",
+    "grade_level": 5,
+    "overall_average": "97.93%",
+    "top_subject": "English, French, Math, Social Studies, Gym",
+    "notes": "Placeholder for Grade 5 notes",
+    "subjects": [
+      { "name": "English", "grade": "100%" },
+      { "name": "French", "grade": "100%" },
+      { "name": "Math", "grade": "100%" },
+      { "name": "Science", "grade": "91.7%" },
+      { "name": "Social Studies", "grade": "100%" },
+      { "name": "Music", "grade": "93.8%" },
+      { "name": "Gym", "grade": "100%" }
+    ]
+  },
+  {
+    "year": "2020–2021",
+    "grade_level": 6,
+    "overall_average": "98.67%",
+    "top_subject": "English, Math, Science, Music, Gym, Woodwork, Electronics, Home Economics",
+    "notes": "Placeholder for Grade 6 notes",
+    "subjects": [
+      { "name": "English", "grade": "100%" },
+      { "name": "French", "grade": "95%" },
+      { "name": "Math", "grade": "100%" },
+      { "name": "Science", "grade": "100%" },
+      { "name": "Social Studies", "grade": "91.7%" },
+      { "name": "Music", "grade": "100%" },
+      { "name": "Gym", "grade": "100%" },
+      { "name": "Woodwork", "grade": "100%" },
+      { "name": "Electronics", "grade": "100%" },
+      { "name": "Clothing", "grade": "100%" }
+    ]
+  },
+  {
+    "year": "2021–2022",
+    "grade_level": 7,
+    "overall_average": "93.20%",
+    "top_subject": "Math, Drama",
+    "notes": "Placeholder for Grade 7 notes",
+    "subjects": [
+      { "name": "English", "grade": "95%" },
+      { "name": "French", "grade": "95%" },
+      { "name": "Math", "grade": "96%" },
+      { "name": "Science", "grade": "95%" },
+      { "name": "Social Studies", "grade": "95%" },
+      { "name": "Music", "grade": "90%" },
+      { "name": "Gym", "grade": "87%" },
+      { "name": "Foods", "grade": "90%" },
+      { "name": "Drama", "grade": "96%" },
+      { "name": "Clothing", "grade": "93%" }
+    ]
+  },
+  {
+    "year": "2022–2023",
+    "grade_level": 8,
+    "overall_average": "93.80%",
+    "top_subject": "Electronics",
+    "notes": "Placeholder for Grade 8 notes",
+    "subjects": [
+      { "name": "English", "grade": "85%" },
+      { "name": "French", "grade": "90%" },
+      { "name": "Math", "grade": "99%" },
+      { "name": "Science", "grade": "98%" },
+      { "name": "Social Studies", "grade": "86%" },
+      { "name": "Music", "grade": "95%" },
+      { "name": "Gym", "grade": "97%" },
+      { "name": "Foods", "grade": "90%" },
+      { "name": "Electronics", "grade": "100%" },
+      { "name": "Clothing", "grade": "98%" }
+    ]
+  },
+  {
+    "year": "2023–2024",
+    "grade_level": 9,
+    "overall_average": "—",
+    "top_subject": "—",
+    "notes": "Placeholder for Grade 9 notes",
+    "subjects": [
+      { "name": "English", "grade": "—" },
+      { "name": "French", "grade": "—" },
+      { "name": "Math", "grade": "—" },
+      { "name": "Chemistry", "grade": "—" },
+      { "name": "Social Studies", "grade": "—" },
+      { "name": "Foreign Language", "grade": "—" },
+      { "name": "Physical Education", "grade": "—" }
+    ]
+  },
+  {
+    "year": "2024–2025",
+    "grade_level": 10,
+    "overall_average": "—",
+    "top_subject": "—",
+    "notes": "Placeholder for Grade 10 notes",
+    "subjects": [
+      { "name": "Math", "grade": "—" },
+      { "name": "English", "grade": "—" },
+      { "name": "Biology", "grade": "—" },
+      { "name": "Chemistry", "grade": "—" },
+      { "name": "Physics", "grade": "—" },
+      { "name": "History", "grade": "—" },
+      { "name": "Foreign Language", "grade": "—" }
+    ]
+  }
+]

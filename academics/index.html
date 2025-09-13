@@ -3,23 +3,74 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Courses, grades, transcripts, tests (as appropriate).">
+  <meta name="description" content="Academic record and achievements.">
   <title>Academics | Nolan Law</title>
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/hub.css">
 </head>
 <body>
   <header id="site-header" class="site"></header>
   <nav id="site-nav"></nav>
-  <main class="container">
-    <h1>Academics</h1>
-    <p class="kicker">Academic record overview.</p>
 
-<div class="grid cards">
-  <a class="card" href="courses/index.html"><h3>Courses</h3><p>Course history & grades.</p></a>
-  <a class="card" href="transcripts/index.html"><h3>Transcripts</h3><p>Evidence & policies.</p></a>
-</div>
+  <main class="container">
+
+    <!-- Hero -->
+    <section class="hero">
+      <img src="../assets/images/academics-hero.jpg" alt="Academics photo" class="hero-img">
+      <h1 class="hero-title">Academics</h1>
+      <p class="hero-sub">Education has been a constant journey of growth, curiosity, and achievement from grade school through high school.</p>
+    </section>
+
+    <!-- Intro -->
+    <section class="intro">
+      <p>Here you’ll find an overview of my academic history — from grades and coursework to achievements and recognition. Each part of my journey has helped shape the student I am today.</p>
+    </section>
+
+    <!-- Feature Cards -->
+    <section class="grid featured">
+      <div class="feature-card">
+        <img src="../assets/images/grades-placeholder.jpg" alt="Grades" class="feature-img">
+        <h2>📊 Grades</h2>
+        <p>Reports from Grade 1–10, with subject performance and yearly progress.</p>
+        <a href="grades/index.html" class="btn-primary">Explore Grades</a>
+      </div>
+
+      <div class="feature-card">
+        <img src="../assets/images/achievements-placeholder.jpg" alt="Achievements" class="feature-img">
+        <h2>🏆 Academic Achievements</h2>
+        <p>Awards, competitions, scholarships, and moments of recognition.</p>
+        <a href="achievements/index.html" class="btn-primary">Explore Achievements</a>
+      </div>
+
+      <div class="feature-card">
+        <img src="../assets/images/learning-placeholder.jpg" alt="Learning Journey" class="feature-img">
+        <h2>📚 Learning Journey</h2>
+        <p>Highlights of subjects, skills, and areas of growth throughout school.</p>
+        <a href="journey/index.html" class="btn-primary">Explore Journey</a>
+      </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section>
+      <h2 class="section-title">Academic Highlights</h2>
+      <div class="grid cards">
+        <div class="card">
+          <h3>Years of School</h3>
+          <p class="kicker">10+</p>
+        </div>
+        <div class="card">
+          <h3>Awards Earned</h3>
+          <p class="kicker">—</p>
+        </div>
+        <div class="card">
+          <h3>Subjects Studied</h3>
+          <p class="kicker">20+</p>
+        </div>
+      </div>
+    </section>
 
   </main>
+
   <footer id="site-footer"></footer>
   <script>window.SITE = {"root":"../","section":"Academics","title":"Academics"};</script>
   <script src="../js/layout.js"></script>
