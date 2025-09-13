@@ -139,17 +139,19 @@
   {
     "year": "2023–2024",
     "grade_level": 9,
-    "overall_average": "—",
-    "top_subject": "—",
+    "overall_average": "96.94%",
+    "top_subject": "Band, Tech",
     "notes": "Placeholder for Grade 9 notes",
     "subjects": [
-      { "name": "English", "grade": "—" },
-      { "name": "French", "grade": "—" },
-      { "name": "Math", "grade": "—" },
-      { "name": "Chemistry", "grade": "—" },
-      { "name": "Social Studies", "grade": "—" },
-      { "name": "Foreign Language", "grade": "—" },
-      { "name": "Physical Education", "grade": "—" }
+      { "name": "Tech 15F", "grade": "100%" },
+      { "name": "Gym 10F", "grade": "97%" },
+      { "name": "Social Studies 10F", "grade": "95.5%" },
+      { "name": "French 10F", "grade": "97%" },
+      { "name": "Jazz Band 10S", "grade": "93%" },
+      { "name": "English 10F", "grade": "94%" },
+      { "name": "Concert Band 10S", "grade": "100%" },
+      { "name": "Math 10F", "grade": "98.5%" },
+      { "name": "Science 10F", "grade": "97%" }
     ]
   },
   {
@@ -158,6 +160,38 @@
     "overall_average": "—",
     "top_subject": "—",
     "notes": "Placeholder for Grade 10 notes",
+    "subjects": [
+      { "name": "Computer Science", "grade": "—" },
+      { "name": "English", "grade": "—" },
+      { "name": "Biology", "grade": "—" },
+      { "name": "Chemistry", "grade": "—" },
+      { "name": "Physics", "grade": "—" },
+      { "name": "History", "grade": "—" },
+      { "name": "Foreign Language", "grade": "—" }
+    ]
+  },
+  {
+    "year": "2025–2026",
+    "grade_level": 11,
+    "overall_average": "—",
+    "top_subject": "—",
+    "notes": "Placeholder for Grade 11 notes",
+    "subjects": [
+      { "name": "Math", "grade": "—" },
+      { "name": "English", "grade": "—" },
+      { "name": "Biology", "grade": "—" },
+      { "name": "Chemistry", "grade": "—" },
+      { "name": "Physics", "grade": "—" },
+      { "name": "History", "grade": "—" },
+      { "name": "Foreign Language", "grade": "—" }
+    ]
+  },
+  {
+    "year": "2026–2027",
+    "grade_level": 12,
+    "overall_average": "—",
+    "top_subject": "—",
+    "notes": "Placeholder for Grade 12 notes",
     "subjects": [
       { "name": "Math", "grade": "—" },
       { "name": "English", "grade": "—" },

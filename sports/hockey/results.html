@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Complete table of hockey game results.">
+  <title>Hockey Results | Nolan Law</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/list.css">
+</head>
+<body>
+  <header id="site-header" class="site"></header>
+  <nav id="site-nav"></nav>
+
+  <main class="container">
+    <section class="results-hero">
+      <h1>Hockey Game Results</h1>
+      <p class="kicker">Every game I’ve played — sortable, searchable, with detailed stats.</p>
+    </section>
+
+    <input type="text" id="search-bar" placeholder="Search games..." class="search-bar">
+
+    <table class="table" id="results-table">
+      <thead>
+        <tr>
+          <th data-index="0" class="sortable">Date</th>
+          <th data-index="1" class="sortable">Opponent</th>
+          <th data-index="2" class="sortable">Result</th>
+          <th data-index="3" class="sortable">Goals</th>
+          <th data-index="4" class="sortable">Assists</th>
+          <th data-index="5" class="sortable">Points</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <p class="small">Source: Personal game records</p>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <!-- Modal -->
+  <div class="modal" id="details-modal">
+    <div class="modal-content">
+      <span class="close-btn" id="close-modal">&times;</span>
+      <h2 id="modal-title">Game Details</h2>
+      <table class="details-table" id="details-table"></table>
+    </div>
+  </div>
+
+  <script>window.SITE = {"root":"../../","section":"Sports","title":"Hockey Results"};</script>
+  <script src="../../js/layout.js"></script>
+  <script src="../../js/main.js"></script>
+  <script>
+let gameData = [];
+
+async function loadResults() {
+  try {
+    const res = await fetch('../../assets/data/hockey-results.json');
+    const data = await res.json();
+    const toDate = d => { const parsed = new Date(d); return isNaN(parsed) ? new Date(0) : parsed; };
+    data.sort((a,b)=>toDate(b.date)-toDate(a.date));
+    gameData = data;
+
+    const tbody = document.querySelector('#results-table tbody');
+    tbody.innerHTML = '';
+
+    gameData.forEach((g, i) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${g.date || '-'}</td>
+        <td>${g.opponent || '-'}</td>
+        <td>${g.result || '-'}</td>
+        <td>${g.goals ?? 0}</td>
+        <td>${g.assists ?? 0}</td>
+        <td>${(g.goals ?? 0) + (g.assists ?? 0)}</td>
+        <td><button data-index="${i}" class="view-details">View</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    document.querySelectorAll('.view-details').forEach(btn => {
+      btn.addEventListener('click', () => showDetails(btn.dataset.index));
+    });
+  } catch(err) { console.error(err); }
+}
+
+function showDetails(idx) {
+  const g = gameData[idx];
+  if (!g) return;
+  const ordered = [
+    ["Date", g.date || '-'],
+    ["Opponent", g.opponent || '-'],
+    ["Result", g.result || '-'],
+    ["Goals", g.goals ?? 0],
+    ["Assists", g.assists ?? 0],
+    ["Plus/Minus", g.plusminus ?? '-'],
+    ["PIM", g.pims ?? 0],
+    ["Notes", g.notes || '-']
+  ];
+  const table = document.getElementById('details-table');
+  table.innerHTML = '';
+  ordered.forEach(([l,v])=>{
+    const row=document.createElement('tr');
+    row.innerHTML=`<td>${l}</td><td>${v}</td>`;
+    table.appendChild(row);
+  });
+  document.getElementById('modal-title').textContent = `vs ${g.opponent || 'Opponent'}`;
+  document.getElementById('details-modal').style.display='flex';
+}
+
+document.getElementById('close-modal').onclick = () => {
+  document.getElementById('details-modal').style.display='none';
+};
+window.onclick = e => { if (e.target.id==='details-modal') document.getElementById('details-modal').style.display='none'; };
+
+loadResults();
+  </script>
+</body>
+</html>

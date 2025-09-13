@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Personal and team season hockey stats.">
+  <title>Season Stats | Nolan Law</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/list.css">
+</head>
+<body>
+  <header id="site-header" class="site"></header>
+  <nav id="site-nav"></nav>
+
+  <main class="container">
+    <section class="results-hero">
+      <h1>Hockey Season Stats</h1>
+      <p class="kicker">Season-by-season breakdown of my performance and my team’s results.</p>
+    </section>
+
+    <!-- Personal Season Stats -->
+    <h2>Personal Season Stats</h2>
+    <input type="text" id="search-personal" placeholder="Search personal stats..." class="search-bar">
+
+    <table class="table" id="personal-table">
+      <thead>
+        <tr>
+          <th data-index="0" class="sortable">Season</th>
+          <th data-index="1" class="sortable">Games</th>
+          <th data-index="2" class="sortable">Goals</th>
+          <th data-index="3" class="sortable">Assists</th>
+          <th data-index="4" class="sortable">Points</th>
+          <th data-index="5" class="sortable">PIM</th>
+          <th data-index="6" class="sortable">+/-</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <!-- Team Season Stats -->
+    <h2>Team Season Stats</h2>
+    <input type="text" id="search-team" placeholder="Search team stats..." class="search-bar">
+
+    <table class="table" id="team-table">
+      <thead>
+        <tr>
+          <th data-index="0" class="sortable">Season</th>
+          <th data-index="1" class="sortable">Games</th>
+          <th data-index="2" class="sortable">Wins</th>
+          <th data-index="3" class="sortable">Losses</th>
+          <th data-index="4" class="sortable">Ties</th>
+          <th data-index="5" class="sortable">Goals For</th>
+          <th data-index="6" class="sortable">Goals Against</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <p class="small">Source: Personal season and team records</p>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <!-- Modal -->
+  <div class="modal" id="details-modal">
+    <div class="modal-content">
+      <span class="close-btn" id="close-modal">&times;</span>
+      <h2 id="modal-title">Season Details</h2>
+      <table class="details-table" id="details-table"></table>
+    </div>
+  </div>
+
+  <script>window.SITE = {"root":"../../","section":"Sports","title":"Season Stats"};</script>
+  <script src="../../js/layout.js"></script>
+  <script src="../../js/main.js"></script>
+  <script>
+let personalData = [];
+let teamData = [];
+
+// ===== Load Stats =====
+async function loadStats() {
+  try {
+    const res = await fetch('../../assets/data/season-stats.json');
+    const data = await res.json();
+    personalData = data.personal || [];
+    teamData = data.team || [];
+
+    buildTable('#personal-table tbody', personalData, true);
+    buildTable('#team-table tbody', teamData, false);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// ===== Build Tables =====
+function buildTable(selector, dataset, isPersonal) {
+  const tbody = document.querySelector(selector);
+  tbody.innerHTML = '';
+
+  dataset.forEach((s, i) => {
+    const tr = document.createElement('tr');
+    if (isPersonal) {
+      tr.innerHTML = `
+        <td>${s.season || '-'}</td>
+        <td>${s.games ?? 0}</td>
+        <td>${s.goals ?? 0}</td>
+        <td>${s.assists ?? 0}</td>
+        <td>${(s.goals ?? 0) + (s.assists ?? 0)}</td>
+        <td>${s.pims ?? 0}</td>
+        <td>${s.plusminus ?? '-'}</td>
+        <td><button data-type="personal" data-index="${i}" class="view-details">View</button></td>
+      `;
+    } else {
+      tr.innerHTML = `
+        <td>${s.season || '-'}</td>
+        <td>${s.games ?? 0}</td>
+        <td>${s.wins ?? 0}</td>
+        <td>${s.losses ?? 0}</td>
+        <td>${s.ties ?? 0}</td>
+        <td>${s.goalsFor ?? 0}</td>
+        <td>${s.goalsAgainst ?? 0}</td>
+        <td><button data-type="team" data-index="${i}" class="view-details">View</button></td>
+      `;
+    }
+    tbody.appendChild(tr);
+  });
+
+  document.querySelectorAll('.view-details').forEach(btn => {
+    btn.addEventListener('click', () => showDetails(btn.dataset.type, btn.dataset.index));
+  });
+}
+
+// ===== Show Details in Modal =====
+function showDetails(type, idx) {
+  const dataset = type === 'personal' ? personalData : teamData;
+  const s = dataset[idx];
+  if (!s) return;
+
+  const ordered = type === 'personal'
+    ? [
+        ["Season", s.season || '-'],
+        ["Games", s.games ?? 0],
+        ["Goals", s.goals ?? 0],
+        ["Assists", s.assists ?? 0],
+        ["Points", (s.goals ?? 0) + (s.assists ?? 0)],
+        ["PIM", s.pims ?? 0],
+        ["Plus/Minus", s.plusminus ?? '-'],
+        ["Notes", s.notes || '-']
+      ]
+    : [
+        ["Season", s.season || '-'],
+        ["Games", s.games ?? 0],
+        ["Wins", s.wins ?? 0],
+        ["Losses", s.losses ?? 0],
+        ["Ties", s.ties ?? 0],
+        ["Goals For", s.goalsFor ?? 0],
+        ["Goals Against", s.goalsAgainst ?? 0],
+        ["Notes", s.notes || '-']
+      ];
+
+  const table = document.getElementById('details-table');
+  table.innerHTML = '';
+  ordered.forEach(([l,v])=>{
+    const row=document.createElement('tr');
+    row.innerHTML=`<td>${l}</td><td>${v}</td>`;
+    table.appendChild(row);
+  });
+
+  document.getElementById('modal-title').textContent = `${s.season || 'Season'} ${type === 'personal' ? 'Personal' : 'Team'} Stats`;
+  document.getElementById('details-modal').style.display='flex';
+}
+
+// ===== Modal Controls =====
+document.getElementById('close-modal').onclick = () => {
+  document.getElementById('details-modal').style.display='none';
+};
+window.onclick = e => { if (e.target.id==='details-modal') document.getElementById('details-modal').style.display='none'; };
+
+// ===== Search Filters =====
+document.getElementById('search-personal').addEventListener('keyup', function() {
+  const filter = this.value.toLowerCase();
+  document.querySelectorAll('#personal-table tbody tr').forEach(row => {
+    row.style.display = row.textContent.toLowerCase().includes(filter) ? "" : "none";
+  });
+});
+document.getElementById('search-team').addEventListener('keyup', function() {
+  const filter = this.value.toLowerCase();
+  document.querySelectorAll('#team-table tbody tr').forEach(row => {
+    row.style.display = row.textContent.toLowerCase().includes(filter) ? "" : "none";
+  });
+});
+
+loadStats();
+  </script>
+</body>
+</html>

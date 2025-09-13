@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2025-01-14",
+    "opponent": "Winnipeg Hawks",
+    "team": "Manitoba Blizzards U16",
+    "location": "Home",
+    "result": "W 4–2",
+    "goals": 1,
+    "assists": 2,
+    "plusminus": 2,
+    "pims": 0,
+    "notes": "Scored opening goal, assisted on GWG"
+  },
+  {
+    "date": "2025-01-21",
+    "opponent": "Regina Stars",
+    "team": "Manitoba Blizzards U16",
+    "location": "Away",
+    "result": "L 1–3",
+    "goals": 0,
+    "assists": 0,
+    "plusminus": -1,
+    "pims": 2,
+    "notes": "Played on PK unit, minor penalty for tripping"
+  },
+  {
+    "date": "2025-01-28",
+    "opponent": "Saskatoon Wolves",
+    "team": "Manitoba Blizzards U16",
+    "location": "Home",
+    "result": "W 6–1",
+    "goals": 2,
+    "assists": 1,
+    "plusminus": 3,
+    "pims": 0,
+    "notes": "Best game of season so far, 2 goals in 2nd period"
+  }
+]

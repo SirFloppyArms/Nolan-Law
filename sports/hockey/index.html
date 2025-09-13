@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hockey stats, game results, and highlights.">
+  <title>Hockey | Nolan Law</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/hub.css">
+</head>
+<body>
+  <header id="site-header" class="site"></header>
+  <nav id="site-nav"></nav>
+
+  <main class="container">
+
+    <!-- Hero -->
+    <section class="hero">
+      <img src="../../assets/images/hockey-hero.jpg" alt="Hockey photo" class="hero-img">
+      <h1 class="hero-title">Hockey</h1>
+      <p class="hero-sub">My journey on the ice — games, stats, and achievements.</p>
+    </section>
+
+    <!-- Intro -->
+    <section class="intro">
+      <p>Hockey has been one of my main sports, pushing me to grow in teamwork, speed, and endurance. This page highlights my game history, season stats, and special achievements in hockey.</p>
+    </section>
+
+    <!-- Feature Cards -->
+    <section class="grid featured">
+      <div class="feature-card">
+        <img src="../../assets/images/hockey-results-thumb.jpg" alt="Game results" class="feature-img">
+        <h2>🏒 Game Results</h2>
+        <p>A complete record of my hockey games with detailed stats and performances.</p>
+        <a href="./results.html" class="btn-primary">View Results</a>
+      </div>
+
+      <div class="feature-card">
+        <img src="../../assets/images/hockey-season-thumb.jpg" alt="Season stats" class="feature-img">
+        <h2>📊 Season Stats</h2>
+        <p>Season summaries with my personal stats and team records.</p>
+        <a href="./season-stats.html" class="btn-primary">View Season Stats</a>
+      </div>
+
+      <div class="feature-card">
+        <img src="../../assets/images/hockey-achievements-thumb.jpg" alt="Achievements" class="feature-img">
+        <h2>🥅 Achievements</h2>
+        <p>Highlights of milestones, memorable games, and awards.</p>
+        <a href="./achievements.html" class="btn-primary">See Achievements</a>
+      </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section>
+      <h2 class="section-title">Hockey Highlights</h2>
+      <div class="grid cards">
+        <div class="card">
+          <h3>Total Games</h3>
+          <p class="kicker" id="total-games">—</p>
+        </div>
+        <div class="card">
+          <h3>Goals Scored</h3>
+          <p class="kicker" id="total-goals">—</p>
+        </div>
+        <div class="card">
+          <h3>Assists</h3>
+          <p class="kicker" id="total-assists">—</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script>window.SITE = {"root":"../../","section":"Sports","title":"Hockey"};</script>
+  <script src="../../js/layout.js"></script>
+  <script src="../../js/main.js"></script>
+</body>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const gamesEl = document.getElementById('total-games');
+  const goalsEl = document.getElementById('total-goals');
+  const assistsEl = document.getElementById('total-assists');
+
+  if (gamesEl) gamesEl.textContent = '…';
+  if (goalsEl) goalsEl.textContent = '…';
+  if (assistsEl) assistsEl.textContent = '…';
+
+  try {
+    const res = await fetch('../../assets/data/hockey-results.json');
+    const data = await res.json();
+
+    if (gamesEl) gamesEl.textContent = data.length;
+
+    const totalGoals = data.reduce((sum, g) => sum + (parseInt(g.goals || 0)), 0);
+    const totalAssists = data.reduce((sum, g) => sum + (parseInt(g.assists || 0)), 0);
+
+    if (goalsEl) goalsEl.textContent = totalGoals;
+    if (assistsEl) assistsEl.textContent = totalAssists;
+  } catch (err) {
+    console.error('Error loading hockey data:', err);
+    if (gamesEl) gamesEl.textContent = '—';
+    if (goalsEl) goalsEl.textContent = '—';
+    if (assistsEl) assistsEl.textContent = '—';
+  }
+});
+</script>
+</html>
