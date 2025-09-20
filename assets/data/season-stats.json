@@ -2,43 +2,226 @@
   "personal": [
     {
       "season": "2024-2025",
-      "games": 30,
-      "goals": 12,
-      "assists": 18,
-      "pims": 14,
-      "plusminus": 8,
-      "notes": "Strong season, played mostly forward."
+      "team": "St. Boniface Seals",
+      "level": "U18 A3",
+      "age": "15",
+      "games": 26,
+      "goals": 9,
+      "assists": 12,
+      "pims": 0,
+      "plusminus": 29,
+      "notes": "Last season playing hockey"
     },
     {
       "season": "2023-2024",
-      "games": 28,
-      "goals": 9,
-      "assists": 15,
-      "pims": 10,
-      "plusminus": 5,
-      "notes": "Improved skating and positioning."
+      "team": "Transcona Regents",
+      "level": "U15 A2",
+      "age": "14",
+      "games": 25,
+      "goals": 30,
+      "assists": 23,
+      "pims": 2,
+      "plusminus": 54,
+      "notes": "-"
+    },
+    {
+      "season": "2022-2023",
+      "team": "Transcona Regents",
+      "level": "U15 A3",
+      "age": "13",
+      "games": 24,
+      "goals": 14,
+      "assists": 11,
+      "pims": 4,
+      "plusminus": 22,
+      "notes": "-"
+    },
+    {
+      "season": "2021-2022",
+      "team": "Springfield Icehawks",
+      "level": "U13 C",
+      "age": "12",
+      "games": 20,
+      "goals": 5,
+      "assists": 28,
+      "pims": 0,
+      "plusminus": 47,
+      "notes": "Won the league championship"
+    },
+    {
+      "season": "2020-2021",
+      "team": "Springfield Icehawks",
+      "level": "Peewee C",
+      "age": "11",
+      "games": 1,
+      "goals": 1,
+      "assists": 0,
+      "pims": 0,
+      "plusminus": 3,
+      "notes": "-"
+    },
+    {
+      "season": "2019-2020",
+      "team": "Springfield Icehawks",
+      "level": "Atom B",
+      "age": "10",
+      "games": 39,
+      "goals": 5,
+      "assists": 19,
+      "pims": 0,
+      "plusminus": 19,
+      "notes": "-"
+    },
+    {
+      "season": "2018-2019",
+      "team": "Springfield Icehawks",
+      "level": "Atom C",
+      "age": "9",
+      "games": 24,
+      "goals": 5,
+      "pims": 0,
+      "notes": "-"
+    },
+    {
+      "season": "2017-2018",
+      "team": "Springfield Icehawks",
+      "level": "Novice B",
+      "age": "8",
+      "games": 31,
+      "goals": 0,
+      "pims": 8,
+      "plusminus": 31,
+      "notes": "-"
+    },
+    {
+      "season": "2016-2017",
+      "team": "Springfield Icehawks",
+      "level": "Novice C",
+      "age": "7",
+      "games": 25,
+      "goals": 2,
+      "pims": 2,
+      "notes": "-"
+    },
+    {
+      "season": "2015-2016",
+      "team": "Springfield Icehawks",
+      "level": "Squirts",
+      "age": "6",
+      "goals": 8,
+      "notes": "-"
     }
   ],
   "team": [
     {
       "season": "2024-2025",
-      "games": 32,
-      "wins": 20,
-      "losses": 10,
-      "ties": 2,
-      "goalsFor": 95,
-      "goalsAgainst": 70,
-      "notes": "Reached playoffs, strong defensive play."
+      "team": "St. Boniface Seals (U18A2)",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "notes": "-"
     },
     {
       "season": "2023-2024",
-      "games": 30,
-      "wins": 18,
-      "losses": 10,
-      "ties": 2,
-      "goalsFor": 88,
-      "goalsAgainst": 72,
-      "notes": "Good offensive season, lacked consistency in defense."
+      "team": "Transcona Regents (U15A1)",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "notes": "-"
+    },
+    {
+      "season": "2022-2023",
+      "team": "Transcona Regents (U15A3)",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "notes": "-"
+    },
+    {
+      "season": "2021-2022",
+      "team": "Springfield Icehawks (U13C)",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "notes": "-"
+    },
+    {
+      "season": "2020-2021",
+      "team": "Springfield Icehawks (Peewee C)",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "notes": "-"
+    },
+    {
+      "season": "2019-2020",
+      "team": "Springfield Icehawks (Atom B)",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "notes": "-"
+    },
+    {
+      "season": "2018-2019",
+      "team": "Springfield Icehawks (Atom C)",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "notes": "-"
+    },
+    {
+      "season": "2017-2018",
+      "team": "Novice B",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "notes": "-"
+    },
+    {
+      "season": "2016-2017",
+      "team": "Novice",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "notes": "-"
+    },
+    {
+      "season": "2015-2016",
+      "team": "Squirts",
+      "games": 0,
+      "wins": 0,
+      "losses": 0,
+      "ties": 0,
+      "goalsFor": 0,
+      "goalsAgainst": 0,
+      "notes": "-"
     }
   ]
 }
