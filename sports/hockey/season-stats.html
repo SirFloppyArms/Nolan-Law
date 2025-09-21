@@ -26,12 +26,13 @@
       <thead>
         <tr>
           <th data-index="0" class="sortable">Season</th>
-          <th data-index="1" class="sortable">Games</th>
-          <th data-index="2" class="sortable">Goals</th>
-          <th data-index="3" class="sortable">Assists</th>
-          <th data-index="4" class="sortable">Points</th>
-          <th data-index="5" class="sortable">PIM</th>
-          <th data-index="6" class="sortable">+/-</th>
+          <th data-index="1" class="sortable">Team</th>
+          <th data-index="2" class="sortable">Level</th>
+          <th data-index="4" class="sortable">Games</th>
+          <th data-index="5" class="sortable">Goals</th>
+          <th data-index="6" class="sortable">Assists</th>
+          <th data-index="7" class="sortable">Points</th>
+          <th data-index="9" class="sortable">+/-</th>
           <th>Details</th>
         </tr>
       </thead>
@@ -46,12 +47,13 @@
       <thead>
         <tr>
           <th data-index="0" class="sortable">Season</th>
-          <th data-index="1" class="sortable">Games</th>
-          <th data-index="2" class="sortable">Wins</th>
-          <th data-index="3" class="sortable">Losses</th>
-          <th data-index="4" class="sortable">Ties</th>
-          <th data-index="5" class="sortable">Goals For</th>
-          <th data-index="6" class="sortable">Goals Against</th>
+          <th data-index="1" class="sortable">Team</th>
+          <th data-index="2" class="sortable">Level</th>
+          <th data-index="4" class="sortable">Games</th>
+          <th data-index="5" class="sortable">Wins</th>
+          <th data-index="6" class="sortable">Losses</th>
+          <th data-index="7" class="sortable">Ties</th>
+          <th data-index="8" class="sortable">Points</th>
           <th>Details</th>
         </tr>
       </thead>
@@ -104,23 +106,25 @@ function buildTable(selector, dataset, isPersonal) {
     if (isPersonal) {
       tr.innerHTML = `
         <td>${s.season || '-'}</td>
+        <td>${s.team || '-'}</td>
+        <td>${s.level || '-'}</td>
         <td>${s.games ?? 0}</td>
         <td>${s.goals ?? 0}</td>
         <td>${s.assists ?? 0}</td>
         <td>${(s.goals ?? 0) + (s.assists ?? 0)}</td>
-        <td>${s.pims ?? 0}</td>
         <td>${s.plusminus ?? '-'}</td>
         <td><button data-type="personal" data-index="${i}" class="view-details">View</button></td>
       `;
     } else {
       tr.innerHTML = `
         <td>${s.season || '-'}</td>
+        <td>${s.team || '-'}</td>
+        <td>${s.level || '-'}</td>
         <td>${s.games ?? 0}</td>
         <td>${s.wins ?? 0}</td>
         <td>${s.losses ?? 0}</td>
         <td>${s.ties ?? 0}</td>
-        <td>${s.goalsFor ?? 0}</td>
-        <td>${s.goalsAgainst ?? 0}</td>
+        <td>${s.points ?? '-'}</td>
         <td><button data-type="team" data-index="${i}" class="view-details">View</button></td>
       `;
     }
@@ -141,6 +145,9 @@ function showDetails(type, idx) {
   const ordered = type === 'personal'
     ? [
         ["Season", s.season || '-'],
+        ["Team", s.team || '-'],
+        ["Level", s.level || '-'],
+        ["Age", s.age || '-'],
         ["Games", s.games ?? 0],
         ["Goals", s.goals ?? 0],
         ["Assists", s.assists ?? 0],
@@ -151,12 +158,14 @@ function showDetails(type, idx) {
       ]
     : [
         ["Season", s.season || '-'],
+        ["Team", s.team || '-'],
+        ["Level", s.level || '-'],
+        ["Age", s.age || '-'],
         ["Games", s.games ?? 0],
         ["Wins", s.wins ?? 0],
         ["Losses", s.losses ?? 0],
         ["Ties", s.ties ?? 0],
-        ["Goals For", s.goalsFor ?? 0],
-        ["Goals Against", s.goalsAgainst ?? 0],
+        ["Points", s.points ?? '-'],
         ["Notes", s.notes || '-']
       ];
 
